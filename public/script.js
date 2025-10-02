@@ -105,6 +105,11 @@ function renderTickets() {
       }
 
       ticketEl.onclick = () => revealTicket(index);
+      const ticketNum = document.createElement('div');
+      ticketNum.className = 'ticketNum';
+      ticketNum.innerHTML += (index+1);
+      
+      ticketEl.appendChild(ticketNum)
       grid.appendChild(ticketEl);
   });
 }
