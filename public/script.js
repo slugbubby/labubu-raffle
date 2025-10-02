@@ -7,7 +7,7 @@ const participants = {
   bobbycarnage: 1,
   buzzhuey: 6,
   charmandy: 1,
-  chillinchiliwilly: 32,
+  chilinchiliwilly: 32,
   chuunck: 34,
   ciphersean: 2,
   degenerall: 1,
