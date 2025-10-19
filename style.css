@@ -117,6 +117,10 @@ a:focus {
     display: none;
 }
 
+.revealed .ticketNum {
+  display: none;
+}
+
 .winner-name {
     color: white;
     font-weight: bold;

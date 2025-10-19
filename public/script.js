@@ -59,20 +59,46 @@ const ticketImages = [
   "https://miro.medium.com/v2/resize:fit:1100/format:webp/0*i9mUWUCtVcFmgS6F.jpg"
 ];
 
+const games = [
+  'dead format',
+  'dead reset',
+  'don\'t stop girly pop',
+  'father',
+  'final sentence',
+  'loop//error',
+  'no players online',
+  'off the text',
+  'provoron',
+  'reanimal',
+  'side effects',
+  'emigari',
+  'an unplayable game?!',
+  'zombie typing'
+]
+
 let tickets = [];
 
 function initializeRaffle() {
   tickets = [];
   
   // Create tickets for each participant
-  for (const [name, count] of Object.entries(participants)) {
-      for (let i = 0; i < count; i++) {
-          tickets.push({
-              name: name,
-              revealed: false,
-              imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
-          });
-      }
+  // for (const [name, count] of Object.entries(participants)) {
+  //     for (let i = 0; i < count; i++) {
+  //         tickets.push({
+  //             name: name,
+  //             revealed: false,
+  //             imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
+  //         });
+  //     }
+  // }
+  
+  // Create a ticket for each game
+  for (const game of games) {
+    tickets.push({
+      name: game,
+      revealed: false,
+      imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
+    })
   }
 
   // Shuffle tickets
