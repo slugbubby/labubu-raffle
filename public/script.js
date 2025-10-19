@@ -48,7 +48,6 @@ const ticketImages = [
   "https://canvasandcharms.com/cdn/shop/files/20250424_112639_430975____11_the-monsters-big-into-energy-series-vinyl-plush-pendant-blind-box_plush_details_popmart-us_____1200x1625_f8a029aa-fe82-402b-adcb-9c0f37ae0b78.webp?v=1750821788&width=823",
   "https://images.lifestyleasia.com/wp-content/uploads/sites/3/2024/07/10162023/450095703_1014672320661450_1399228617381498066_n-1362x900.jpg?tr=w-1600",
   "https://cdn.shopify.com/s/files/1/0708/4415/3891/files/angel-in-clouds_480x480.jpg?v=1737550955",
-  "https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-6/485949151_654319930867594_8384215692944955308_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=3e1fe2&_nc_ohc=YykCpCCDOiIQ7kNvwFNMjcp&_nc_oc=AdmO5eOa8byqHQNBu7VdpuCWTOc0jXkiVOJBDMSM236AlQ75YM4VUpXIYDCsVitDnx0&_nc_zt=23&_nc_ht=scontent-iad3-2.xx&_nc_gid=HZKykYyH3Cx-RrYv4TTudw&oh=00_AfZxZkXKI94nfsqPTFAosTrRjhlMF7rGkW_mj1iDv_qunA&oe=68E4B020",
   "https://www.calembou.com/cdn/shop/files/labubu-yellow-duck-clothing-set_1.jpg?v=1749698859",
   "https://images.ft.com/v3/image/raw/ftcms%3A867d6b77-18a8-40bf-96f4-81b5ef1d493a?source=next-article&fit=scale-down&quality=highest&width=700&dpr=2",
   "https://i.ebayimg.com/images/g/soEAAOSwYKdmrInu/s-l960.webp",
@@ -59,46 +58,20 @@ const ticketImages = [
   "https://miro.medium.com/v2/resize:fit:1100/format:webp/0*i9mUWUCtVcFmgS6F.jpg"
 ];
 
-const games = [
-  'dead format',
-  'dead reset',
-  'don\'t stop girly pop',
-  'father',
-  'final sentence',
-  'loop//error',
-  'no players online',
-  'off the text',
-  'provoron',
-  'reanimal',
-  'side effects',
-  'emigari',
-  'an unplayable game?!',
-  'zombie typing'
-]
-
 let tickets = [];
 
 function initializeRaffle() {
   tickets = [];
   
   // Create tickets for each participant
-  // for (const [name, count] of Object.entries(participants)) {
-  //     for (let i = 0; i < count; i++) {
-  //         tickets.push({
-  //             name: name,
-  //             revealed: false,
-  //             imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
-  //         });
-  //     }
-  // }
-  
-  // Create a ticket for each game
-  for (const game of games) {
-    tickets.push({
-      name: game,
-      revealed: false,
-      imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
-    })
+  for (const [name, count] of Object.entries(participants)) {
+      for (let i = 0; i < count; i++) {
+          tickets.push({
+              name: name,
+              revealed: false,
+              imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
+          });
+      }
   }
 
   // Shuffle tickets
@@ -134,8 +107,7 @@ function renderTickets() {
       const ticketNum = document.createElement('div');
       ticketNum.className = 'ticketNum';
       ticketNum.innerHTML += (index+1);
-      
-      ticketEl.appendChild(ticketNum)
+
       grid.appendChild(ticketEl);
   });
 }
