@@ -41,7 +41,6 @@ const participants = {
 const ticketImages = [
   "https://upload.wikimedia.org/wikipedia/en/a/a9/Pop_Mart_Labubu_The_Monsters_Exciting_Macaron.jpg?w=100&h=100&fit=crop",
   "https://i0.wp.com/zaloramalaysiablog.wpcomstaging.com/wp-content/uploads/2024/10/20240617_101957_041165____2_____1200x1200.jpg?w=100&h=100&fit=crop",
-  "https://static.wikia.nocookie.net/baldis-basics-songkran/images/e/e9/Labubucharacter.png/revision/latest?cb=20240817082348?w=100&h=100&fit=crop",
   "https://platform.vox.com/wp-content/uploads/sites/2/2025/07/gettyimages-2226084406.jpg?quality=90&strip=all&crop=0%2C4.4877344877345%2C100%2C91.024531024531?w=100&h=100&fit=crop",
   "https://canvasandcharms.com/cdn/shop/files/20250418_172540_561496____6_the-monsters-big-into-energy-series-vinyl-plush-pendant-blind-box_plush_details_popmart-us_____1200x1200_e27f9218-ed73-4754-a251-10e29b62353b.jpg?w=100&h=100&fit=crop",
   "https://canvasandcharms.com/cdn/shop/files/20250424_112639_483553____12_the-monsters-big-into-energy-series-vinyl-plush-pendant-blind-box_plush_details_popmart-us_____1200x1711_ea078202-6cd8-4aa3-94f7-f34181d2c163.webp?v=1750821788&width=823",
@@ -60,24 +59,47 @@ const ticketImages = [
 
 let tickets = [];
 
+const games = [
+  'don\'t stop girly pop',
+  'dynasty warriors',
+  'father',
+  'heaven does not respond',
+  'loop//error',
+  'off the text',
+  'on-together',
+  'side effects',
+  'umigari',
+  'an unplayable game?!',
+  'zombie typing'
+];
+
 function initializeRaffle() {
   tickets = [];
   
   // Create tickets for each participant
-  for (const [name, count] of Object.entries(participants)) {
-      for (let i = 0; i < count; i++) {
-          tickets.push({
-              name: name,
-              revealed: false,
-              imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
-          });
-      }
+  // for (const [name, count] of Object.entries(participants)) {
+  //   for (let i = 0; i < count; i++) {
+  //     tickets.push({
+  //       name: name,
+  //       revealed: false,
+  //       imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
+  //     });
+  //   }
+  // }
+
+  // Create a ticket for each game
+  for (const game of games) {
+    tickets.push({
+      name: game,
+      revealed: false,
+      imageUrl: ticketImages[Math.floor(Math.random() * ticketImages.length)]
+    })
   }
 
   // Shuffle tickets
   for (let i = tickets.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [tickets[i], tickets[j]] = [tickets[j], tickets[i]];
+    const j = Math.floor(Math.random() * (i + 1));
+    [tickets[i], tickets[j]] = [tickets[j], tickets[i]];
   }
 
   renderTickets();
@@ -90,33 +112,32 @@ function renderTickets() {
   document.getElementById('totalTickets').textContent = tickets.length;
 
   tickets.forEach((ticket, index) => {
-      const ticketEl = document.createElement('div');
-      ticketEl.className = 'ticket';
-      
-      if (ticket.revealed) {
-          ticketEl.classList.add('revealed');
-          ticketEl.innerHTML = `<div class="winner-name">${ticket.name}</div>`;
-      } else {
-          const img = document.createElement('img');
-          img.src = ticket.imageUrl;
-          img.alt = 'Raffle Ticket';
-          ticketEl.appendChild(img);
-      }
+    const ticketEl = document.createElement('div');
+    ticketEl.className = 'ticket';
+    
+    if (ticket.revealed) {
+      ticketEl.classList.add('revealed');
+      ticketEl.innerHTML = `<div class="winner-name">${ticket.name}</div>`;
+    } else {
+      const img = document.createElement('img');
+      img.src = ticket.imageUrl;
+      img.alt = 'Raffle Ticket';
+      ticketEl.appendChild(img);
+    }
 
-      ticketEl.onclick = () => revealTicket(index);
-      const ticketNum = document.createElement('div');
-      ticketNum.className = 'ticketNum';
-      ticketNum.innerHTML += (index+1);
+    ticketEl.onclick = () => onTicketClick(index);
+    const ticketNum = document.createElement('div');
+    ticketNum.className = 'ticketNum';
+    ticketNum.innerHTML += (index+1);
 
-      grid.appendChild(ticketEl);
+    ticketEl.appendChild(ticketNum)
+    grid.appendChild(ticketEl);
   });
 }
 
-function revealTicket(index) {
-  if (!tickets[index].revealed) {
-      tickets[index].revealed = true;
-      renderTickets();
-  }
+function onTicketClick(index) {
+  tickets[index].revealed = !tickets[index].revealed;
+  renderTickets();
 }
 
 function resetRaffle() {

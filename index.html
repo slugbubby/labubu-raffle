@@ -18,17 +18,13 @@
 <body>
   <div class="wrapper">
     <div class="content" role="main">
-      <h1 class="title">slug's vibey labubu raffle</h1>
+      <h1 class="title">slug's not-rigged raffle</h1>
         
-        <div class="info">
-            <span id="totalTickets">0</span> tickets in the draw
-        </div>
+      <div class="controls">
+        <button onclick="resetRaffle()">shuffle <span id="totalTickets">0</span> entries</button>
+      </div>
 
-        <div class="controls">
-            <button onclick="resetRaffle()">reset raffle</button>
-        </div>
-
-        <div class="tickets-grid" id="ticketsGrid"></div>
+      <div class="tickets-grid" id="ticketsGrid"></div>
     </div>
   </div>
 </body>
